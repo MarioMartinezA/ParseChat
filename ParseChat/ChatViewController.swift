@@ -9,14 +9,39 @@
 import UIKit
 import Parse
 
-class ChatViewController: UIViewController {
+class ChatViewController: UIViewController, UITableViewDataSource {
 
     @IBOutlet weak var chatMessageField: UITextField!
+    
+    @IBOutlet weak var tableView: UITableView!
+    var messages: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        
+        fetchMessages()
+        tableView.dataSource = self
+        
+    }
+    
+    func fetchMessages() {
+        let query = PFQuery(className: "Message")
+        query.order(byDescending: "_created_at")
+        
+        query.findObjectsInBackground { ( messages: [PFObject]?, error: Error?) in
+            if let mess = messages {
+                print(mess)
+                self.messages = mess
+                self.tableView.reloadData()
+            } else {
+                print("Error receiving the messages")
+            }
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +61,29 @@ class ChatViewController: UIViewController {
                 print("Problem saving message\(error.localizedDescription)")
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(self.messages.count)
+        return self.messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
+        
+        let mess = messages[indexPath.row]
+        
+        print("Table function")
+        print(messages)
+        
+        cell.messageLabel.text = mess["text"] as? String
+        
+        return cell
+    }
+    
+    func onTimer() {
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
     }
 
     /*
