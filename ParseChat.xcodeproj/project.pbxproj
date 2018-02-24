@@ -17,6 +17,8 @@
 		8960A58A204105FA000E5864 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8960A588204105FA000E5864 /* LaunchScreen.storyboard */; };
 		8960A595204105FA000E5864 /* ParseChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8960A594204105FA000E5864 /* ParseChatTests.swift */; };
 		8960A5A0204105FA000E5864 /* ParseChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8960A59F204105FA000E5864 /* ParseChatUITests.swift */; };
+		8960A5AE20410BC2000E5864 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8960A5AD20410BC2000E5864 /* LoginViewController.swift */; };
+		8960A5B12041151B000E5864 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8960A5B02041151B000E5864 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		8960A59B204105FA000E5864 /* ParseChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ParseChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8960A59F204105FA000E5864 /* ParseChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseChatUITests.swift; sourceTree = "<group>"; };
 		8960A5A1204105FA000E5864 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8960A5AD20410BC2000E5864 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8960A5B02041151B000E5864 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		9E457243702C00F2605F6DDE /* Pods-ParseChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseChatUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParseChatUITests/Pods-ParseChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B643CBB0B55B79A62819B002 /* Pods-ParseChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ParseChatUITests/Pods-ParseChatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C0438A66705C7F998893A2E6 /* Pods-ParseChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ParseChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ParseChatTests/Pods-ParseChatTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 		8960A57E204105FA000E5864 /* ParseChat */ = {
 			isa = PBXGroup;
 			children = (
+				8960A5AF20410BC9000E5864 /* ViewControllers */,
 				8960A57F204105FA000E5864 /* AppDelegate.swift */,
 				8960A581204105FA000E5864 /* ViewController.swift */,
 				8960A583204105FA000E5864 /* Main.storyboard */,
@@ -150,6 +155,15 @@
 				8960A5A1204105FA000E5864 /* Info.plist */,
 			);
 			path = ParseChatUITests;
+			sourceTree = "<group>";
+		};
+		8960A5AF20410BC9000E5864 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8960A5AD20410BC2000E5864 /* LoginViewController.swift */,
+				8960A5B02041151B000E5864 /* ChatViewController.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		A3D4A9181B46410953D4C029 /* Pods */ = {
@@ -460,7 +474,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8960A5AE20410BC2000E5864 /* LoginViewController.swift in Sources */,
 				8960A582204105FA000E5864 /* ViewController.swift in Sources */,
+				8960A5B12041151B000E5864 /* ChatViewController.swift in Sources */,
 				8960A580204105FA000E5864 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,6 +728,7 @@
 				8960A5A6204105FA000E5864 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8960A5A7204105FA000E5864 /* Build configuration list for PBXNativeTarget "ParseChatTests" */ = {
 			isa = XCConfigurationList;
@@ -720,6 +737,7 @@
 				8960A5A9204105FA000E5864 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8960A5AA204105FA000E5864 /* Build configuration list for PBXNativeTarget "ParseChatUITests" */ = {
 			isa = XCConfigurationList;
@@ -728,6 +746,7 @@
 				8960A5AC204105FA000E5864 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
