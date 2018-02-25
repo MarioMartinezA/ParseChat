@@ -46,7 +46,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
-Due to the server not working we had to use our own server to display information. 
+1. Due to the server not working we had to use our own server to display information. 
 
 ## License
 
