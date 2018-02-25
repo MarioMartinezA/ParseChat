@@ -6,6 +6,8 @@
 //  Copyright © 2018 csumb. All rights reserved.
 //
 
+//TODO: check username constrains
+
 import UIKit
 import Parse
 
@@ -26,16 +28,29 @@ class ChatViewController: UIViewController, UITableViewDataSource {
         fetchMessages()
         tableView.dataSource = self
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(ChatViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
+        
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.fetchMessages), userInfo: nil, repeats: true)
+        
+    }
+    
+    func didPullToRefresh(_ refreshControl: UIRefreshControl) {
+        fetchMessages()
+        refreshControl.endRefreshing()
     }
     
     func fetchMessages() {
         let query = PFQuery(className: "Message")
         query.order(byDescending: "_created_at")
+        query.includeKey("user")
+        
         
         query.findObjectsInBackground { ( messages: [PFObject]?, error: Error?) in
             if let mess = messages {
-                print(mess)
                 self.messages = mess
+                
                 self.tableView.reloadData()
             } else {
                 print("Error receiving the messages")
@@ -53,10 +68,12 @@ class ChatViewController: UIViewController, UITableViewDataSource {
         let chatMessage = PFObject(className: "Message")
         
         chatMessage["text"] = chatMessageField.text ?? ""
+        chatMessage["user"] = PFUser.current()      // TODO: 
         
         chatMessage.saveInBackground { (success, error) in
             if success {
                 print("The message was saved")
+                self.chatMessageField.text = ""
             } else if let error = error {
                 print("Problem saving message\(error.localizedDescription)")
             }
@@ -64,7 +81,6 @@ class ChatViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.messages.count)
         return self.messages.count
     }
     
@@ -74,17 +90,25 @@ class ChatViewController: UIViewController, UITableViewDataSource {
         
         let mess = messages[indexPath.row]
         
-        print("Table function")
-        print(messages)
+        if let user = mess["user"] as? PFUser {
+            // User found! update username label with username
+            cell.usernameLabel.text = user.username
+        } else {
+            // No user found, set default username
+            cell.usernameLabel.text = "🤖"
+        }
         
         cell.messageLabel.text = mess["text"] as? String
+        
         
         return cell
     }
     
-    func onTimer() {
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.onTimer), userInfo: nil, repeats: true)
+    @IBAction func logoutButton(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+
     }
+
 
     /*
     // MARK: - Navigation
